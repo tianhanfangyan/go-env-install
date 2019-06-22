@@ -24,31 +24,36 @@ function usage() {
 # 安装go包管理工具
 function InstallGvm(){
     cd ~
-    GVMPATH=$users".gvm"
+    GVMPATH=$HOME"/.gvm"
     if [ ! -d "$GVMPATH" ];
     then
         info "Install the gvm...."
         bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
         sed -i 's!https://go.googlesource.com/go!https://github.com/golang/go!g' $GVMPATH/scripts/install
-        echo "export GVM_ROOT=$users/.gvm"
+        echo "export GVM_ROOT=$HOME/.gvm"
+    else
+        info "YOU ALREADY INSTALL GVM"
     fi
-    info "YOU ALREADY INSTALL GVM"
+    info "INSTALL GVM completed"
 }
 
 GOVERSION=$1
 
 # 安装go版本
 function InstallGoVersion(){
-    info "Install $GOVERSION as go version."
+
     gvm install $GOVERSION
+    info "Install $GOVERSION as go version."
 
     # 创建GOPATH
-    gopath=$users"go"
+    gopath=$HOME"/go"
     if [ ! -d $gopath ];
     then
         info "Create go workspace, include src,bin,pkg folder..."
         warn "Use $GOPATH as golang workspace..."
-        mkdir $users"go"
+        mkdir $HOME"/go"
+    else
+        info "You already create GOPATH"
     fi
 
     # 声明变量
@@ -56,6 +61,8 @@ function InstallGoVersion(){
     then
         echo "export GOPATH=$gopath"
         echo "export PATH=$PATH:$GOPATH/bin"
+    else
+        info "You already export GOPATH"
     fi
     info "Install completed."
 
@@ -64,6 +71,7 @@ function InstallGoVersion(){
 # 升级go版本
 function UpgradeGoVersion(){
     # TODO
+    echo "gvm use $GOVERSION"
     echo `go version`
     info "Upgrade completed."
 }

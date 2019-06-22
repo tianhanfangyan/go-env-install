@@ -17,7 +17,7 @@ git config --global http.postBuffer 524288000
 bash go_install.sh <GOVERSION>
 
 examples:
-    bash go_install.sh 1.12.4
+    bash go_install.sh go1.12.4
 ```
 
 #### via other
