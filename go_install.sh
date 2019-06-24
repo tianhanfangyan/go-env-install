@@ -30,6 +30,7 @@ function InstallGvm(){
         info "Install the gvm...."
         bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
         sed -i 's!https://go.googlesource.com/go!https://github.com/golang/go!g' $GVMPATH/scripts/install
+        sed -i 's!https://go.googlesource.com/go!https://github.com/golang/go!g' $GVMPATH/scripts/listall
         echo "export GVM_ROOT=$HOME/.gvm"
     else
         info "YOU ALREADY INSTALL GVM"
